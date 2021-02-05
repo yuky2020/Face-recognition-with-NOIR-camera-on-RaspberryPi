@@ -32,14 +32,12 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 
 - [x] Fotoresistor auto turn on ir light in low and no light condiction  
 
-- [ ] Use of  more sequential image (5) and distance mesure for evaluate lan intrusion(if the sequential  probe images presence all the exact same distance there is  with high probably an intrusion in the network )
+- [x] Use of  more sequential image (5) and distance mesure for evaluate lan intrusion(if the sequential  probe images presence all the exact same distance there is  with high probably an intrusion in the network )
 
-- [ ] Presence of anti spoofing tecnique
+- [x] Presence of anti spoofing tecnique,done by design, screen and printed face  image reflect badly ir light and make spofing very difficult. 
 
 - [x] Fast operation with no buffering 
 
 - [ ] Biometric system as a service in a future multimodal version (array of data from various pi are evaluated to bring a more precise response  )
-  
-   
 
 ## Project structure
