@@ -42,12 +42,14 @@ while(run):
 
     # connection closed automatically at the end of the with-block
 
-    #there is a file losing during real time transfer, one evry 30 frames usaly
+    #there is a file losing during real time transfer, one evry 20 frames usualy 
    
 
     for i in range(10):
         try:    
-                #load the image and extrapolate faces in the image  using viola-jones algorithm  
+                #load the image and extrapolate faces in the image using  Histogram of OrientedGradients (HOG)
+                #feature combined with a linear classifier, an image pyramid, and sliding window detection scheme.  
+                #This type of object detector is fairly general and capable of detecting  also other  types of semi-rigid objects  
                 unknown_image = face_recognition.load_image_file("unknown/unknown{}.jpg".format(i))
                 #Save the location for the varius faces 
                 unknown_face_locations = face_recognition.face_locations(unknown_image)

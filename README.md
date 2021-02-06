@@ -12,7 +12,7 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 
 - RaspberryPi ZeroW or 4/3/2
 
-- RaspberryPi NOIR camera + ir lights and fotoresistor .
+- RaspberryPi NOIR camera + ir lights and photoresistor .
 
 - Any Kind of server with Docker(could also be another RaspberryPi or a remote server)  (for the not standalone version)
 
@@ -41,3 +41,33 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 - [ ] Biometric system as a service in a future multimodal version (array of data from various pi are evaluated to bring a more precise response  )
 
 ## Project structure
+
+
+
+
+
+## Design choise:
+
+1.Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the     help of gradients,
+
+    why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
+
+    Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     a  multimodal face recognition system.
+
+
+
+2.face encodings:Given a image, return the 128-dimension face encoding for each face     in the image.
+
+
+
+3. 
+
+
+
+
+
+
+
+
+
+ 
