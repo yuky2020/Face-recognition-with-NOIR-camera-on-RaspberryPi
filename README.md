@@ -16,9 +16,9 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 
 - Any Kind of server with Docker(could also be another RaspberryPi or a remote server)  (for the not standalone version)
 
-- The Dockerfile in this repo, modded version of the one founded here [Dockerile]([face_recognition/docker-compose.yml at master · ageitgey/face_recognition · GitHub](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)) 
+- The Dockerfile in this repo, modded version of the one founded here [Dockerile]([face_recognition/docker-compose.yml at master · ageitgey/face_recognition · GitHub](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)),install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
 
-- Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).
+- Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).For enroll just put the photo in the folder Known_Person
 
 - Lan connection between server and raspberry
 
@@ -39,6 +39,8 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 - [x] Presence of anti spoofing tecnique,done by design, screen and printed face  image reflect badly ir light and make spofing very difficult. 
 
 - [x] Fast operation with no buffering 
+
+- [x] A standalone version using only the pi zero w ()
 
 - [ ] Biometric system as a service in a future multimodal version (array of data from various pi are evaluated to bring a more precise response  )
 
@@ -71,10 +73,10 @@ The server(could be another raspberry or a proper server running the docker imag
 
        ![](https://raw.githubusercontent.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/main/readmeImage/Hog.png)
 
-    why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
+    Why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
 
     Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     a  multimodal face recognition system.
 
-2.face encodings:Given a image, return the 128-dimension face encoding for each face     in the image.
+2.face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
 
       ![](https://cdn-images-1.medium.com/max/1600/1*AbEg31EgkbXSQehuNJBlWg.png)

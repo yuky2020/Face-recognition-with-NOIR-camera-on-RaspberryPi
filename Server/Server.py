@@ -31,7 +31,7 @@ while(run):
     savedPersonIndex=[]
     allarmRise=False
     with pysftp.Connection(host=myHostname, username=myUsername, password=myPassword) as sftp:
-        print("Connection succesfully stablished ... ")
+        print("Ready for Download images ... ")
         for i in range(10):   
             # Define the file that you want to download from the raspberry directory
             remoteFilePath = 'photo/image{}.jpg'.format(i)
@@ -78,7 +78,7 @@ while(run):
                     #if a person is found print it .
                     print("found a person named {}".format(name))
 
-        except: print("one image is lost during the tranfert")
+        except: print("1Frame is lost")
 
 
 
