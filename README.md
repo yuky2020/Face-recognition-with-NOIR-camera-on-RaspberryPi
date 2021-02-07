@@ -77,7 +77,9 @@ The server(could be another raspberry or a proper server running the docker imag
 
 
 
-1.Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the     help of gradients.
+Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the    
+
+help of gradients.
 
        ![](https://raw.githubusercontent.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/main/readmeImage/Hog.png)
 
@@ -90,19 +92,19 @@ The server(could be another raspberry or a proper server running the docker imag
 How HOG works:
 To find faces in an image, we’ll start by making our image black and white because we don’t need color data to find faces:
 
-#image here
+<img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_osGdB2BNMThhk1rTwo07JA.jpeg?raw=true" title="" alt="" width="243">
 
 Then we’ll look at every single pixel in our image one at a time. For every single pixel, we want to look at the pixels that directly surrounding it:
 
-#gif here
+![](https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_RZS05e_5XXQdofdRx1GvPA.gif?raw=true)
 
 Our goal is to figure out how dark the current pixel is compared to the pixels directly surrounding it. Then we want to draw an arrow showing in which direction the image is getting darker:
 
-#gif 2 here
+![](https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_WF54tQnH1Hgpoqk-Vtf9Lg.gif?raw=true)
 
 If you repeat that process for **every single pixel** in the image, you end up with every pixel being replaced by an arrow. These arrows are called *gradients* and they show the flow from light to dark across the entire image:
 
-#gif 3
+![](https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_oTdaElx_M-_z9c_iAwwqcw.gif?raw=true)
 
 This might seem like a random thing to do, but there’s a really good reason for replacing the pixels with gradients. If we analyze pixels directly, really dark images and really light images of the same person will have totally different pixel values. But by only considering the *direction* that brightness changes, both really dark images and really bright images will end up with the same exact representation. That makes the problem a lot easier to solve!
 
@@ -112,21 +114,39 @@ To do this, we’ll break up the image into small squares of 16x16 pixels each. 
 
 The end result is we turn the original image into a very simple representation that captures the basic structure of a face in a simple way:
 
-#gif3
+![](https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_uHisafuUw0FOsoZA992Jdg.gif?raw=true)
 
 To find faces in this HOG image, all we have to do is find the part of our image that looks the most similar to a known HOG pattern that was extracted from a bunch of other training faces:
 
-#image4
+<img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_6xgev0r-qn4oR88FrW6fiA.png?raw=true" title="" alt="" width="429">
 
 Using this technique, we can now easily find faces in any image:
 
-#image 5
+<img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_dOtP6yl7d4c0oaR6NpfWVg.jpeg?raw=true" title="" alt="" width="485">
 
   
 
-2.face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
+2.Posing and Projecting Faces
+
+Whew, we isolated the faces in our image. But now we have to deal with the problem that faces turned different directions look totally different to a computer:
+
+To account for this, we will try to warp each picture so that the eyes and lips are always in the sample place in the image. This will make it a lot easier for us to compare faces in the next steps.
+
+To do this, we are going to use an algorithm called **face landmark estimation**. There are lots of ways to do this, but we are going to use the approach [invented in 2014 by Vahid Kazemi and Josephine Sullivan.](http://www.csc.kth.se/~vahidk/papers/KazemiCVPR14.pdf)
+
+The basic idea is we will come up with 68 specific points (called *landmarks*) that exist on every face — the top of the chin, the outside edge of each eye, the inner edge of each eyebrow, etc. Then we will train a machine learning algorithm to be able to find these 68 specific points on any face:
 
       ![](https://cdn-images-1.medium.com/max/1600/1*AbEg31EgkbXSQehuNJBlWg.png)
+
+
+
+
+
+3.Face encondigns
+
+
+
+face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
 
 3. Why there is a Standalone version?
    
