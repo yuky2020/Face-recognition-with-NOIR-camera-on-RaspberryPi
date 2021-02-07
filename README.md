@@ -26,7 +26,7 @@ The model of Raspberry pi  is the zero w ( is the  one with lower computational 
 
 - Lan connection between server and raspberry
 
-- (Standalone version) Install the dipendency on the raspberryPi 
+- (Standalone version) Install the dipendency on the raspberryPi (there is a readme in the sub folder)
 
 ## Prerequisite:
 
@@ -66,13 +66,14 @@ The ir light intensity is setted by the photoresistor.
 
 The server(could be another raspberry or a proper server running the docker image ):
 
-- Load on sturtup all the known faces and encode it in a 128-dimensions matrix(use numpy)
+- Load on sturtup all the known faces and encode it in a 128-dimensions matrix(use numpy)and OpenFace pretrained CNN
 - Downlad the 10 frames from the PiZeroW
 - Search in each image for one or more face (Face Localization)
 - Each founded face is encoded 
 - The Server start the comparison between all the face knowed and the founded Faces
 - For each match(if the distance is less than the trashold) the server save  the distance and put it in an array.
 - The name of the face with the lower distance in the match array is printed  as result,if there is no face that match the systems print unkonown faces
+- for every unknown face the original image frame is saved in the intruder folder 
 - (AntiHacking tecnique) is almost impossibile that more than 8 photo on 10  with the same subject have exactly the same distance from the knowed ones, so if this happen, probably there is an intrusion in the lan.
 
 ## Design choices:
@@ -157,4 +158,27 @@ We use a simple linear SVM classifier as we have see in lessons
 
 The standalone version make your raspberry a little and compact face recognition system, anyway the model zeroW is not situable for begin used in this way, infact can capture and analize only one frame every 10 second with a gallery of  5 person,
 
-anyway with the model 4 or 3b performance jumps at  2(model 3b+ ) or 10(model 4 4gb)  frames analized per second,  
+anyway with the model 4 or 3b performance jumps at  4(model 3b+ ) or 10(model 4 4gb)  frames analized per second so the system could be reliably used (ex for unlocking door or any type of closed set operation)
+
+## Euclidian Distance and Accuracy as a Percentage
+
+Each face is rappresnted  as a point in an imaginary 128-dimensional space. To check if two faces match, we checks if the distance between those two points is less than 0.6 (the default threshold). Using a lower threshold than 0.6 makes the face comparison more strict.
+
+To have a percente match  betweeen two face  we need to convert a face distance in a perrcent match score, to do this i use :
+
+```python
+import math
+
+def face_distance_to_conf(face_distance, face_match_threshold=0.6):
+    if face_distance > face_match_threshold:
+        range = (1.0 - face_match_threshold)
+        linear_val = (1.0 - face_distance) / (range * 2.0)
+        return linear_val
+    else:
+        range = face_match_threshold
+        linear_val = 1.0 - (face_distance / (range * 2.0))
+        return linear_val + ((1.0 - linear_val) * math.pow((linear_val - 0.5) * 2, 0.2))
+
+```
+
+for a face match threshold of 0.6 i get  :
