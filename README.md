@@ -64,8 +64,6 @@ The server(could be another raspberry or a proper server running the docker imag
 - For each match(if the distance is less than the trashold) the server save  the distance and put it in an array.
 - The name of the face with the lower distance in the match array is printed  as result,if there is no face that match the systems print unkonown faces
 - (AntiHacking tecnique) is almost impossibile that more than 8 photo on 10  with the same subject have exactly the same distance from the knowed ones, so if this happen, probably there is an intrusion in the lan.
-  
-  
 
 ## Design choise:
 
@@ -75,7 +73,11 @@ The server(could be another raspberry or a proper server running the docker imag
 
     Why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
 
-    Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     a  multimodal face recognition system.
+    Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     this project and  for  a future multimodal (face recognition system)   version .
+
+    anyway hog is not as good as dlib CNN for recognition of odd faces so if you have     enough system performance you should go with it. 
+
+
 
 2.face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
 
