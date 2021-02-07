@@ -230,3 +230,11 @@ FRR with FAR setted at 0:
 | false acceptance | 0     | 0     |
 | FRR(%)           | 22.73 | 27.27 |
 | FAR(%)           | 0.00  | 0.00  |
+
+
+
+FAR,FRR and EER graphic in the end show that 0,6 is a good value for the threshold:
+
+(added 0.27/1 to the graphic for show that when FRR is a that value  FAR is actualy 0.000~  )
+
+![](https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/FARFRRERR.png?raw=true)
