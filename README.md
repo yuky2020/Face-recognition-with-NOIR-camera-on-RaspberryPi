@@ -164,7 +164,7 @@ anyway with the model 4 or 3b performance jumps at  4(model 3b+ ) or 10(model 4 
 
 Each face is rappresnted  as a point in an imaginary 128-dimensional space. To check if two faces match, we checks if the distance between those two points is less than 0.6 (the default threshold). Using a lower threshold than 0.6 makes the face comparison more strict.
 
-To have a percente match  betweeen two face  we need to convert a face distance in a perrcent match score, to do this i use :
+To have a percente match  betweeen two face  we need to convert a face distance in a perrcent match score, to do this use :
 
 ```python
 import math
@@ -181,4 +181,52 @@ def face_distance_to_conf(face_distance, face_match_threshold=0.6):
 
 ```
 
-for a face match threshold of 0.6 i get  :
+For a face match threshold of 0.6  the results :
+
+<img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/0.6threshold.percantage.png?raw=true" title="" alt="" width="419">
+
+For a face match threshold of 0.4 the results:
+
+<img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/0.4threshold,percentage.png?raw=true" title="" alt="" width="429">
+
+
+
+## False Acceptance Rate, False Rejection Rate and Equal Error Rate
+
+i used this guide to get a graphic of FAR FRR and to find EER and check if 0.6 was the really the best treshold  [GUIDE](https://medium.com/@mustafaazzurri/face-recognition-system-and-calculating-frr-far-and-eer-for-biometric-system-evaluation-code-2ac2bd4fd2e5)
+
+anyway, due to the pandemic and the fact that i can't use screen to test image directly on the camera, all test are doned copying dataset images from the raspberry to the server and check if the image get a match with the actual real image pre encoded 
+
+With [Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) dataset i get a 96% of accuracy using cnn implementation of dilb, very close to the one you can find in dlib and face_rec _documentations  of 99.38% [dlib](http://dlib.net/) [face_rec]([face-recognition · PyPI](https://pypi.org/project/face-recognition/)) , i think anyway that the difference is more caused to network problem in transfer all the data than other things. 
+
+The HoG algorithm in dlib that is real used in this project anyway get worst result but is incredibly fast  (0.011 seconds / image), the accuracy rate is  (FRR = 27.27%, FAR=0%).[JITE](https://ojs.uma.ac.id/index.php/jite/article/view/3865) 
+
+test on 50 images:(time for each execution)
+
+| Dlib              |       |       |
+| ----------------- | ----- | ----- |
+| Test n            | CNN   | Hog   |
+| 1                 | 1.828 | 0.469 |
+| 2                 | 1.766 | 0.578 |
+| 3                 | 1.781 | 0.859 |
+| 4                 | 1.781 | 0.484 |
+| 5                 | 1.797 | 0.453 |
+| 6                 | 1.938 | 0.438 |
+| 7                 | 1.781 | 0.500 |
+| 8                 | 2.047 | 0.516 |
+| 9                 | 1.828 | 0.516 |
+| 10                | 1.766 | 0.453 |
+| avreage(second)   | 1.831 | 0.527 |
+| avreage per image | 0.037 | 0.011 |
+
+
+
+FRR with FAR setted at 0:
+
+|                  | CNN   | Hog   |
+| ---------------- | ----- | ----- |
+| Total detections | 119   | 112   |
+| false rejection  | 35    | 42    |
+| false acceptance | 0     | 0     |
+| FRR(%)           | 22.73 | 27.27 |
+| FAR(%)           | 0.00  | 0.00  |
