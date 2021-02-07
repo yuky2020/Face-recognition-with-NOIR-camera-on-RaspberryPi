@@ -6,6 +6,8 @@ This is the project for the course of biometric system.
 
 NOIR camera is a rapspberry pi camera module where there is no ir filter, abbinated with 2 ir light let you see image also in low and no light condition with good  contrast in grayscale, so could provide face recognition also in low light condition with direct ir light that make the subject illuminated omogenusly  . 
 
+
+
 The model of Raspberry pi that is used is the zero w ( is the  one with lower computational power, lower power consume and wireless connectivity ),  reasonably implementable also in a multimodal biometric system .
 
 ## Requirement:
