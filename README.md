@@ -16,7 +16,9 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 
 - Any Kind of server with Docker(could also be another RaspberryPi or a remote server)  (for the not standalone version)
 
-- The Dockerfile in this repo, modded version of the one founded here [Dockerile]([face_recognition/docker-compose.yml at master · ageitgey/face_recognition · GitHub](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)),install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
+- The Dockerfile in this repo, modded version of the one founded here [Dockerile](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)
+  
+  install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
 
 - Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).For enroll just put the photo in the folder Known_Person the server on startup will encode all the known faces
 
@@ -78,8 +80,6 @@ The server(could be another raspberry or a proper server running the docker imag
     Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     this project and  for  a future multimodal (face recognition system)   version .
 
     anyway hog is not as good as dlib CNN for recognition of odd faces so if you have     enough system performance you should go with it. 
-
-
 
 2.face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
 
