@@ -77,19 +77,22 @@ The server(could be another raspberry or a proper server running the docker imag
 
 
 
-Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the    
+### Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the
 
 help of gradients.
 
        ![](https://raw.githubusercontent.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/main/readmeImage/Hog.png)
 
-    Why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
+Why not a deep lerning based ones why not use wavelets, why the Hog from dlib?
 
-    Because dilib hog algorithm is generaly faster and works on grayscale images with     low resorces used,  so it's perfect to be used with ir light and to work with real time     video, i have done some testing also with a cnn model, but my system can't     elaborate   more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for     this project and  for  a future multimodal (face recognition system)   version .
+Because dilib hog algorithm is generaly faster and works on grayscale images withlow resorces used,  so it's perfect to be used with ir light and to work with real time video, i have done some testing also with a cnn model, but my system can't  elaborate  more than 5 of  the 10 frames sended every second. even with     paralaization  of the process; so i conclude that using a cnn model is not realiable for this project and  for  a future multimodal (face recognition system)   version .
 
-    anyway hog is not as good as dlib CNN for recognition of odd faces so if you have     enough system performance you should go with it. 
+anyway hog is not as good as dlib CNN for recognition of odd faces so if you have
 
-How HOG works:
+enough system performance you should go with it. 
+
+#### How HOG works:
+
 To find faces in an image, we’ll start by making our image black and white because we don’t need color data to find faces:
 
 <img src="https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/blob/main/readmeImage/1_osGdB2BNMThhk1rTwo07JA.jpeg?raw=true" title="" alt="" width="243">
@@ -126,7 +129,7 @@ Using this technique, we can now easily find faces in any image:
 
   
 
-2.Posing and Projecting Faces
+#### Posing and Projecting Faces
 
 Whew, we isolated the faces in our image. But now we have to deal with the problem that faces turned different directions look totally different to a computer:
 
@@ -142,7 +145,7 @@ The basic idea is we will come up with 68 specific points (called *landmarks*) 
 
 
 
-3.Face encondigns
+#### Face encondigns
 
 
 
