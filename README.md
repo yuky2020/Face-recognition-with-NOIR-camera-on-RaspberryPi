@@ -18,9 +18,11 @@ The model of Raspberry pi that is used is the zero w ( is the  one with lower co
 
 - The Dockerfile in this repo, modded version of the one founded here [Dockerile]([face_recognition/docker-compose.yml at master · ageitgey/face_recognition · GitHub](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)),install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
 
-- Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).For enroll just put the photo in the folder Known_Person
+- Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).For enroll just put the photo in the folder Known_Person the server on startup will encode all the known faces
 
 - Lan connection between server and raspberry
+
+- (Standalone version) Install the dipendency on the raspberryPi 
 
 ## Prerequisite:
 
