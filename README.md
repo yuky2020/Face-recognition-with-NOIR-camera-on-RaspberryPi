@@ -2,7 +2,7 @@
 
 ## Why:
 
-This is the project for the course of biometric system.
+### This is the project for the course of Biometric system.
 
 NOIR camera is a rapspberry pi camera module where there is no ir filter, abbinated with 2 ir light let you see image also in low and no light condition with good  contrast in grayscale, so could provide face recognition also in low light condition with direct ir light that make the subject illuminated omogenusly  . 
 
@@ -20,9 +20,7 @@ The model of Raspberry pi  is the zero w ( is the  one with lower computational 
 
 - Any Kind of server with Docker(could also be another RaspberryPi or a remote server)  (for the not standalone version)
 
-- The Dockerfile in this repo, modded version of the one founded here [Dockerile](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)
-  
-  install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
+- The Dockerfile in this repo, modded version of the one founded here [Dockerile](https://github.com/ageitgey/face_recognition/blob/master/docker-compose.yml)install automaticaly all the dipendences(face_recognition,openCv,numpy,dlib_),copy this repo and execute the server
 
 - Any other camera device as a phone cam or a web cam for enrollment (if you don't want to enroll  on the camera directly ).For enroll just put the photo in the folder Known_Person the server on startup will encode all the known faces
 
@@ -35,6 +33,8 @@ The model of Raspberry pi  is the zero w ( is the  one with lower computational 
 - Ssh connection enable on RaspberryPi
 
 - python 3 on raspberry pi with camera module import avaible 
+
+- Lan connection between raspberry and the server, you could connect it also over wan by forwarding the port but  is not advisable for security reasons 
 
 ## Features
 

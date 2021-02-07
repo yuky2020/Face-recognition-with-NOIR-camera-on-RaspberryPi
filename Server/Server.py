@@ -2,6 +2,7 @@ import pysftp
 import face_recognition
 import os 
 import numpy as np
+from shutil import copyfile
 #run indicate the actual state of the server
 run=True
 #the hostname or address of the raspberry pi
@@ -16,13 +17,16 @@ known_faces=[]
 known_faces_encodings=[]
 known_faces_names=[]
 matches=[]
+#number of intruder in the server
+intrn=0
 k=0
 #iterate trouhght all 
 for filename in os.listdir(knowdirectory):
-    known_faces_names.append(filename)
-    known_faces.append(face_recognition.load_image_file("known_faces/{}".format(filename)))
-    known_faces_encodings.append(face_recognition.face_encodings(known_faces[k])[0])
-    k=k+1
+    if filename.endswith(".jpg") or filename.endswith(".png"):
+        known_faces_names.append(filename)
+        known_faces.append(face_recognition.load_image_file("known_faces/{}".format(filename)))
+        known_faces_encodings.append(face_recognition.face_encodings(known_faces[k])[0])
+        k=k+1
 while(run):
     #save the distance of the best result  for evry istance and the index of the know person in the  list identificated,
     #if the distance of the best result point to the same person and are equal there is probably an attack on the lan
@@ -77,6 +81,10 @@ while(run):
 
                     #if a person is found print it .
                     print("found a person named {}".format(name))
+                    #if his name is unknow save the image in the intruder directory 
+                    if(name=="Unknown"):
+                        intrn=intrn+1
+                        copyfile("unknown/unknown{}.jpg".format(i),"Intruder/intruder{}.jpg".format(intrn))
 
         except: print("1Frame is lost")
 
