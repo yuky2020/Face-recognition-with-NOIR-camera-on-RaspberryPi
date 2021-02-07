@@ -1,6 +1,6 @@
-# Install dlib and face_recognition on a Raspberry Pi
+# Install dependency on a Raspberry Pi
 
-Instructions tested with a Raspberry Pi 2 with an 8GB memory card. Probably also works fine on a Raspberry Pi 3.
+Instructions tested with a Raspberry PiZeroW  with an 8GB memory card. Probably also works fine on  Raspberry Pi2/3/4
 
 ## Steps
 
@@ -17,7 +17,7 @@ Run `sudo raspi-config` and configure the basics:
 - Save changes and reboot.
   Install required libraries with these commands:
   
-  ```
+  ```bash
   sudo apt-get update
   sudo apt-get upgrade
   sudo apt-get install build-essential \
@@ -46,14 +46,14 @@ Run `sudo raspi-config` and configure the basics:
   
   Install the picamera python library with array support (if you are using a camera):
   
-  ```
+  ```bash
   sudo apt-get install python3-picamera
   sudo pip3 install --upgrade picamera[array]
   ```
   
   Temporarily enable a larger swap file size (so the dlib compile won't fail due to limited memory):
   
-  ```
+  ```bash
   sudo nano /etc/dphys-swapfile
   < change CONF_SWAPSIZE=100 to CONF_SWAPSIZE=1024 and save / exit nano >
   sudo /etc/init.d/dphys-swapfile restart
@@ -61,7 +61,7 @@ Run `sudo raspi-config` and configure the basics:
   
   Download and install dlib v19.6:
   
-  ```
+  ```bash
   mkdir -p dlib
   git clone -b 'v19.6' --single-branch https://github.com/davisking/dlib.git dlib/
   cd ./dlib
@@ -70,14 +70,22 @@ Run `sudo raspi-config` and configure the basics:
   
   Install `face_recognition`:
   
-  ```
+  ```bash
   sudo pip3 install face_recognition
   ```
   
   Revert the swap file size change now that dlib is installed:
   
-  ```
+  ```bash
   sudo nano /etc/dphys-swapfile
   < change CONF_SWAPSIZE=1024 to CONF_SWAPSIZE=100 and save / exit nano >
   sudo /etc/init.d/dphys-swapfile restart
   ```
+
+         Copy the project and lunch it         
+
+```bash
+    git clone https://github.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi
+    cd Face recognition with NOIR camera on RaspberryPi/StandaloneVersion
+    python3 standalone.py
+```
