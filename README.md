@@ -149,10 +149,10 @@ The basic idea is we will come up with 68 specific points (called *landmarks*) 
 
 
 
-face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
+face encodings:given a image, return the 128-dimension face encoding for each face  in the image.
 
-3. Why there is a Standalone version?
-   
-   The standalone version make your raspberry a little and compact face recognition system, anyway the model zeroW is not situable for begin used in this way, infact can capture and analize only one frame every 10 second with a gallery of  5 person,
-   
-   anyway with the model 4 or 3b performance jumps at  2(model 3b+ ) or 10(model 4 4gb)  frames analized per second,  
+#### Why there is a Standalone version?
+
+The standalone version make your raspberry a little and compact face recognition system, anyway the model zeroW is not situable for begin used in this way, infact can capture and analize only one frame every 10 second with a gallery of  5 person,
+
+anyway with the model 4 or 3b performance jumps at  2(model 3b+ ) or 10(model 4 4gb)  frames analized per second,  
