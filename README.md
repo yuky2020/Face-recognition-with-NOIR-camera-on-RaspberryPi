@@ -8,9 +8,9 @@ NOIR camera is a rapspberry pi camera module where there is no ir filter, abbina
 
 <img src="https://raw.githubusercontent.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/main/readmeImage/PiCAM_NoIR-M12.png" title="" alt="" width="251">
 
-The model of Raspberry pi that is used is the zero w ( is the  one with lower computational power, lower power consume and wireless connectivity ),  reasonably implementable also in a multimodal biometric system .
+The model of Raspberry pi  is the zero w ( is the  one with lower computational power, lower power consume and wireless connectivity ),  reasonably implementable also in a multimodal biometric system .
 
-
+<img src="https://raw.githubusercontent.com/yuky2020/Face-recognition-with-NOIR-camera-on-RaspberryPi/main/readmeImage/HTB1CfEboNPI8KJjSspoq6x6MFXaY.png" title="" alt="" width="470">
 
 ## Requirement:
 
@@ -73,7 +73,9 @@ The server(could be another raspberry or a proper server running the docker imag
 - The name of the face with the lower distance in the match array is printed  as result,if there is no face that match the systems print unkonown faces
 - (AntiHacking tecnique) is almost impossibile that more than 8 photo on 10  with the same subject have exactly the same distance from the knowed ones, so if this happen, probably there is an intrusion in the lan.
 
-## Design choise:
+## Design choices:
+
+
 
 1.Using  dlib  HOG feature descriptor  to extract the features pixel by pixel with the     help of gradients.
 
@@ -85,6 +87,49 @@ The server(could be another raspberry or a proper server running the docker imag
 
     anyway hog is not as good as dlib CNN for recognition of odd faces so if you have     enough system performance you should go with it. 
 
+How HOG works:
+To find faces in an image, we’ll start by making our image black and white because we don’t need color data to find faces:
+
+#image here
+
+Then we’ll look at every single pixel in our image one at a time. For every single pixel, we want to look at the pixels that directly surrounding it:
+
+#gif here
+
+Our goal is to figure out how dark the current pixel is compared to the pixels directly surrounding it. Then we want to draw an arrow showing in which direction the image is getting darker:
+
+#gif 2 here
+
+If you repeat that process for **every single pixel** in the image, you end up with every pixel being replaced by an arrow. These arrows are called *gradients* and they show the flow from light to dark across the entire image:
+
+#gif 3
+
+This might seem like a random thing to do, but there’s a really good reason for replacing the pixels with gradients. If we analyze pixels directly, really dark images and really light images of the same person will have totally different pixel values. But by only considering the *direction* that brightness changes, both really dark images and really bright images will end up with the same exact representation. That makes the problem a lot easier to solve!
+
+But saving the gradient for every single pixel gives us way too much detail. We end up [missing the forest for the trees](https://en.wiktionary.org/wiki/see_the_forest_for_the_trees). It would be better if we could just see the basic flow of lightness/darkness at a higher level so we could see the basic pattern of the image.
+
+To do this, we’ll break up the image into small squares of 16x16 pixels each. In each square, we’ll count up how many gradients point in each major direction (how many point up, point up-right, point right, etc…). Then we’ll replace that square in the image with the arrow directions that were the strongest.
+
+The end result is we turn the original image into a very simple representation that captures the basic structure of a face in a simple way:
+
+#gif3
+
+To find faces in this HOG image, all we have to do is find the part of our image that looks the most similar to a known HOG pattern that was extracted from a bunch of other training faces:
+
+#image4
+
+Using this technique, we can now easily find faces in any image:
+
+#image 5
+
+  
+
 2.face encodings:given a image, return the 128-dimension face encoding for each face     in the image.
 
       ![](https://cdn-images-1.medium.com/max/1600/1*AbEg31EgkbXSQehuNJBlWg.png)
+
+3. Why there is a Standalone version?
+   
+   The standalone version make your raspberry a little and compact face recognition system, anyway the model zeroW is not situable for begin used in this way, infact can capture and analize only one frame every 10 second with a gallery of  5 person,
+   
+   anyway with the model 4 or 3b performance jumps at  2(model 3b+ ) or 10(model 4 4gb)  frames analized per second,  
