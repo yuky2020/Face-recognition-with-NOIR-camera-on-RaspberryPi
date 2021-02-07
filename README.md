@@ -147,9 +147,9 @@ The basic idea is we will come up with 68 specific points (called *landmarks*) 
 
 #### Face encondigns
 
+given a image, return the 128-dimension face encoding for each face  in the image.
 
 
-face encodings:given a image, return the 128-dimension face encoding for each face  in the image.
 
 #### Why there is a Standalone version?
 
